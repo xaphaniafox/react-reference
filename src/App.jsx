@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Search from "./components/Search";
 import List from "./components/List";
 
@@ -18,7 +19,7 @@ function App() {
     },
     {
       id: 1,
-      title: "Readux",
+      title: "Redux",
       url: "https://redux.js.org",
       author: "Mohammad Kia",
       num_comments: 2,
@@ -26,9 +27,15 @@ function App() {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
+
+  const searchedStories = stories.filter((story) =>
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -36,7 +43,7 @@ function App() {
         {welcome.greeting} {welcome.title}
       </h1>
       <Search onSearch={handleSearch} />
-      <List list={stories} />
+      <List list={searchedStories} />
     </>
   );
 }
