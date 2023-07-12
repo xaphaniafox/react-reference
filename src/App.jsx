@@ -27,7 +27,7 @@ function App() {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("React");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -42,7 +42,7 @@ function App() {
       <h1>
         {welcome.greeting} {welcome.title}
       </h1>
-      <Search onSearch={handleSearch} />
+      <Search search={searchTerm} onSearch={handleSearch} />
       <List list={searchedStories} />
     </>
   );
