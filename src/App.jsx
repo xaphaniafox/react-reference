@@ -25,12 +25,17 @@ function App() {
       points: 5,
     },
   ];
+
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <>
       <h1>
         {welcome.greeting} {welcome.title}
       </h1>
-      <Search />
+      <Search onSearch={handleSearch} />
       <List list={stories} />
     </>
   );
