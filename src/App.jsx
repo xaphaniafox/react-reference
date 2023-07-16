@@ -50,6 +50,7 @@ function App() {
         label="Search"
         value={searchTerm}
         onInputChange={handleSearch}
+        isFocused
       />
       <List list={searchedStories} />
     </>
