@@ -3,7 +3,7 @@ const Search = (props) => {
     props.onSearch(event);
   };
   return (
-    <div>
+    <>
       <label htmlFor="search">Search</label>
       <input
         type="text"
@@ -11,7 +11,7 @@ const Search = (props) => {
         value={props.search}
         onChange={handleChange}
       />
-    </div>
+    </>
   );
 };
 
