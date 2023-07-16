@@ -1,4 +1,5 @@
-import Search from "./components/Search";
+import InputWithLabel from "./components/InputWithLabel";
+import Search from "./components/InputWithLabel";
 import List from "./components/List";
 import useStorageState from "./hooks/useStorageState";
 
@@ -45,7 +46,12 @@ function App() {
       <h1>
         {welcome.greeting} {welcome.title}
       </h1>
-      <Search search={searchTerm} onSearch={handleSearch} />
+      <InputWithLabel
+        id="search"
+        label="Search"
+        value={searchTerm}
+        onInputChange={handleSearch}
+      />
       <List list={searchedStories} />
     </>
   );
