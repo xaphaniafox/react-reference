@@ -1,5 +1,4 @@
 import InputWithLabel from "./components/InputWithLabel";
-import Search from "./components/InputWithLabel";
 import List from "./components/List";
 import useStorageState from "./hooks/useStorageState";
 
