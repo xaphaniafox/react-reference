@@ -1,12 +1,21 @@
-const Item = (props) => {
+const Item = ({
+  id,
+  url,
+  title,
+  author,
+  num_comments,
+  points,
+  onRemoveItem,
+}) => {
   return (
     <li>
       <span>
-        <a href={props.item.url}>{props.item.title}</a>
+        <a href={url}>{title}</a>
       </span>
-      <span>{props.item.author}</span>
-      <span>{props.item.num_comments}</span>
-      <span>{props.item.points}</span>
+      <span>{author}</span>
+      <span>{num_comments}</span>
+      <span>{points}</span>
+      <button onClick={() => onRemoveItem(id)}>Remove</button>
     </li>
   );
 };

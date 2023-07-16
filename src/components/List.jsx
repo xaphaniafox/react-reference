@@ -1,10 +1,10 @@
 import Item from "./Item";
 
-const List = (props) => {
+const List = ({ list, onRemoveItem }) => {
   return (
     <ul>
-      {props.list.map((user) => (
-        <Item key={user.id} item={user} />
+      {list.map((item) => (
+        <Item key={item.id} {...item} onRemoveItem={onRemoveItem} />
       ))}
     </ul>
   );
