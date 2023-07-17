@@ -36,8 +36,7 @@ function App() {
   const getAsyncStories = () =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        // resolve({ data: { stories: initialStories } });
-        reject();
+        resolve({ data: { stories: initialStories } });
       }, 2000);
     });
 
