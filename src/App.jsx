@@ -8,6 +8,17 @@ const welcome = {
   title: "React",
 };
 
+const storiesReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_STORIES":
+      return action.payload;
+    case "REMOVE_STORY":
+      return state.filter((story) => story.id !== action.payload);
+    default:
+      return state;
+  }
+};
+
 function App() {
   const initialStories = [
     {
@@ -27,16 +38,6 @@ function App() {
       points: 5,
     },
   ];
-  const storiesReducer = (state, action) => {
-    switch (action.type) {
-      case "SET_STORIES":
-        return action.payload;
-      case "REMOVE_STORY":
-        return state.filter((story) => story.id !== action.payload);
-      default:
-        return state;
-    }
-  };
 
   const [stories, dispatchStories] = useReducer(storiesReducer, []);
   // const [stories, setStories] = useState([]);
