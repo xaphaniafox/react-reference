@@ -39,26 +39,9 @@ const storiesReducer = (state, action) => {
   }
 };
 
-function App() {
-  const initialStories = [
-    {
-      id: 0,
-      title: "React",
-      url: "https://reactjs.org",
-      author: "Reza Ahmadi",
-      num_comments: 3,
-      points: 4,
-    },
-    {
-      id: 1,
-      title: "Redux",
-      url: "https://redux.js.org",
-      author: "Mohammad Kia",
-      num_comments: 2,
-      points: 5,
-    },
-  ];
+const API_ENDPOINT = "https://react-mini-projects-api.classbon.com/Story/list";
 
+function App() {
   const [stories, dispatchStories] = useReducer(storiesReducer, {
     data: [],
     isLoading: false,
@@ -76,11 +59,12 @@ function App() {
 
   useEffect(() => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
-    getAsyncStories()
-      .then((result) => {
+    fetch(API_ENDPOINT)
+      .then((respond) => respond.json())
+      .then((stories) => {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
-          payload: result.data.stories,
+          payload: stories,
         });
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
