@@ -49,17 +49,11 @@ function App() {
   });
   const [searchTerm, setSearchTerm] = useStorageState("search", "");
 
-  const getAsyncStories = () =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ data: { stories: initialStories } });
-        // reject();
-      }, 2000);
-    });
-
   useEffect(() => {
+    if (!searchTerm) return;
+
     dispatchStories({ type: "STORIES_FETCH_INIT" });
-    fetch(API_ENDPOINT)
+    fetch(`${API_ENDPOINT}?query=${searchTerm}`)
       .then((respond) => respond.json())
       .then((stories) => {
         dispatchStories({
@@ -68,7 +62,7 @@ function App() {
         });
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
-  }, []);
+  }, [searchTerm]);
 
   const handleRemoveStory = (id) => {
     dispatchStories({ type: "REMOVE_STORY", payload: id });
@@ -78,9 +72,10 @@ function App() {
     setSearchTerm(event.target.value);
   };
 
-  const searchedStories = stories.data.filter((story) =>
-    story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // No longer searchedStories is needed
+  // const searchedStories = stories.data.filter((story) =>
+  //   story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   return (
     <>
@@ -97,7 +92,7 @@ function App() {
       {stories.isLoading ? (
         <p>Loading...</p>
       ) : (
-        <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+        <List list={stories.data} onRemoveItem={handleRemoveStory} />
       )}
     </>
   );
