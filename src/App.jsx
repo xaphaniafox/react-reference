@@ -40,7 +40,6 @@ function App() {
   ];
 
   const [stories, dispatchStories] = useReducer(storiesReducer, []);
-  // const [stories, setStories] = useState([]);
   const [searchTerm, setSearchTerm] = useStorageState("search", "");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -57,7 +56,6 @@ function App() {
     getAsyncStories()
       .then((result) => {
         dispatchStories({ type: "SET_STORIES", payload: result.data.stories });
-        // setStories(result.data.stories);
         setIsLoading(false);
       })
       .catch(() => setIsError(true));
@@ -65,8 +63,6 @@ function App() {
 
   const handleRemoveStory = (id) => {
     dispatchStories({ type: "REMOVE_STORY", payload: id });
-    // dispatchStories({type: "SET_STORIES", payload: newStories});
-    // setStories(newStories);
   };
 
   const handleSearch = (event) => {
